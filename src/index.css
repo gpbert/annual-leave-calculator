@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+
+  /* Apple-esque Dark Mode Palette */
+  --bg-app: #1e1e1e;
+  /* Dark gray background */
+  --bg-panel: #262626;
+  /* Slightly lighter for cards */
+  --bg-input: #333333;
+
+  --text-primary: #ffffff;
+  --text-secondary: #9a9a9a;
+  --text-tertiary: #555555;
+
+  --accent-red: #ff453a;
+  /* Apple Red */
+  --accent-green: #30d158;
+  /* Apple Green */
+  --accent-blue: #0a84ff;
+  /* Apple Blue */
+  --accent-yellow: #ffd60a;
+  /* Apple Yellow */
+
+  --border-subtle: #383838;
+  --border-focus: #555555;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Layout Utilities Replacement */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-sm {
+  gap: var(--space-sm);
+}
+
+.gap-md {
+  gap: var(--space-md);
+}
+
+/* Typography */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.text-subtle {
+  color: var(--text-secondary);
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/* Components */
+.app-header {
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-panel);
+  margin-bottom: var(--space-lg);
+}
+
+.card {
+  background: var(--bg-panel);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Inputs */
+input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+
+button {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: var(--border-focus);
+}
+
+button.primary {
+  background: var(--accent-blue);
+  color: white;
+}
+
+/* One Screen Layout */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  /* Prevent body scroll */
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: 100vh;
+  background: var(--bg-app);
+}
+
+.sidebar {
+  background: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border-subtle);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  z-index: 10;
+}
+
+.main-content {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Calendar Card to fill space */
+.calendar-card {
+  flex: 1;
+  background: var(--bg-panel);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  overflow: hidden;
+  /* Contain grid */
+}
+
+/* Calendar Specifics */
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.day-header {
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding-right: var(--space-sm);
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* Use a proper strict grid borders like Apple's expanded view? 
+     Or just gaps. Apple usually has lines. */
+  gap: 1px;
+  /* To simulate borders if we use background color */
+  background: var(--border-subtle);
+  /* The lines color */
+  border: 1px solid var(--border-subtle);
+  flex: 1;
+  /* Fill remaining height */
+  min-height: 0;
+  /* Allow grid to shrink if needed */
+}
+
+.day-cell {
+  background: var(--bg-panel);
+  /* Remove fixed min-height, let it fill grid */
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.1s;
+  user-select: none;
+  /* Prevent text selection during drag */
+}
+
+.day-cell.disabled {
+  background: #1a1a1a;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.day-cell:hover:not(.disabled) {
+  filter: brightness(1.2);
+}
+
+.day-cell.selected {
+  background: rgba(10, 132, 255, 0.2);
+  /* Blue tint select */
+  box-shadow: inset 0 0 0 2px var(--accent-blue);
+  z-index: 2;
+}
+
+.day-cell.other-month {
+  background: #2a2a2a;
+  color: var(--text-tertiary);
+  opacity: 0.5;
+}
+
+.day-cell.today .day-number {
+  background: var(--accent-red);
+  color: white;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Full cell backgrounds */
+.cell-ferie {
+  background: rgba(48, 209, 88, 0.2) !important;
+  /* Green tint */
+  border-left: 3px solid var(--accent-green);
+}
+
+.cell-permessi {
+  background: rgba(255, 214, 10, 0.2) !important;
+  /* Yellow tint */
+  border-left: 3px solid var(--accent-yellow);
+}
+
+.cell-holiday {
+  background: rgba(255, 69, 58, 0.15) !important;
+  /* Red tint */
+}
+
+.day-number {
+  align-self: flex-end;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.day-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.event-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: right;
+  opacity: 0.9;
+}
+
+.label-ferie {
+  color: var(--accent-green);
+}
+
+.label-permessi {
+  color: var(--accent-yellow);
+}
+
+.label-holiday {
+  color: var(--accent-red);
+}
+
+/* Config Section */
+.config-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .config-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: var(--bg-panel);
+  padding: var(--space-lg);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  border: 1px solid var(--border-subtle);
+}
