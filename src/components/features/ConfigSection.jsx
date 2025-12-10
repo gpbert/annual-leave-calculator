@@ -7,20 +7,23 @@ export function ConfigSection({ config, updateConfig }) {
     };
 
     return (
-        <div className="card mb-8">
-            <h2 className="mb-4 text-left">Settings</h2>
-            <div className="config-grid">
-                <div>
-                    <h3 className="text-subtle uppercase mb-2 text-sm">Ferie (Annual Leave)</h3>
-                    <div className="flex-col gap-2">
-                        <label className="text-xs">Current Balance (Hours)</label>
+        <div className="flex flex-col gap-6">
+            <h2 className="text-xl font-semibold px-1">Settings</h2>
+
+            <div className="group-box">
+                <h3 className="text-md font-medium mb-4 text-white">Annual Leave (Ferie)</h3>
+                <div className="flex flex-col gap-4">
+                    <div>
+                        <label className="label">Current Balance (Hours)</label>
                         <input
                             type="number"
                             name="currentAnnualBalance"
                             value={config.currentAnnualBalance}
                             onChange={handleChange}
                         />
-                        <label className="text-xs mt-2">Monthly Accrual (Hours)</label>
+                    </div>
+                    <div>
+                        <label className="label">Monthly Accrual (Hours)</label>
                         <input
                             type="number"
                             name="monthlyAnnualAccrual"
@@ -30,18 +33,22 @@ export function ConfigSection({ config, updateConfig }) {
                         />
                     </div>
                 </div>
+            </div>
 
-                <div>
-                    <h3 className="text-subtle uppercase mb-2 text-sm">Permessi (R.O.L.)</h3>
-                    <div className="flex-col gap-2">
-                        <label className="text-xs">Current Balance (Hours)</label>
+            <div className="group-box">
+                <h3 className="text-md font-medium mb-4 text-white">R.O.L. (Permessi)</h3>
+                <div className="flex flex-col gap-4">
+                    <div>
+                        <label className="label">Current Balance (Hours)</label>
                         <input
                             type="number"
                             name="currentPermessiBalance"
                             value={config.currentPermessiBalance}
                             onChange={handleChange}
                         />
-                        <label className="text-xs mt-2">Monthly Accrual (Hours)</label>
+                    </div>
+                    <div>
+                        <label className="label">Monthly Accrual (Hours)</label>
                         <input
                             type="number"
                             name="monthlyPermessiAccrual"

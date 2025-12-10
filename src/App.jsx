@@ -53,40 +53,37 @@ function App() {
     <div className="app-layout">
       <aside className="sidebar">
         <header>
-          <h1 className="text-2xl font-bold mb-1">Leave Calc</h1>
-          <p className="text-subtle text-sm">Plan your year.</p>
+          <h1>Leave Calc</h1>
+          <p>Plan your year.</p>
         </header>
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {/* Action Panel - Only visible when days are selected */}
           {selectedDates.length > 0 && (
-            <div className="mb-6 bg-gray-800/50 p-4 rounded-lg border border-gray-700 animate-in fade-in slide-in-from-left-4">
-              <h3 className="text-sm font-bold text-white mb-3">
+            <div className="group-box animate-in fade-in slide-in-from-left-4">
+              <h3 style={{ fontSize: '15px', marginBottom: '12px' }}>
                 {selectedDates.length} Day{selectedDates.length > 1 ? 's' : ''} Selected
               </h3>
 
-              <div className="flex flex-col gap-2">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <button
                   onClick={() => handleAction('ferie')}
-                  className="w-full bg-green-900/30 hover:bg-green-900/50 text-green-400 border border-green-800/50 hover:border-green-700 p-2 rounded flex items-center justify-center gap-2 transition-all"
+                  style={{ backgroundColor: 'rgba(48, 209, 88, 0.15)', color: 'var(--accent-green)' }}
                 >
-                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
                   Mark as Ferie
                 </button>
 
                 <button
                   onClick={() => handleAction('permessi')}
-                  className="w-full bg-yellow-900/30 hover:bg-yellow-900/50 text-yellow-400 border border-yellow-800/50 hover:border-yellow-700 p-2 rounded flex items-center justify-center gap-2 transition-all"
+                  style={{ backgroundColor: 'rgba(255, 214, 10, 0.15)', color: 'var(--accent-yellow)' }}
                 >
-                  <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
                   Mark as Permessi
                 </button>
 
                 <button
                   onClick={() => handleAction('clear')}
-                  className="w-full bg-red-900/20 hover:bg-red-900/40 text-red-400 border border-red-800/50 hover:border-red-700 p-2 rounded flex items-center justify-center gap-2 transition-all mt-2"
+                  className="destructive"
                 >
-                  <X size={14} />
                   Clear Selection
                 </button>
               </div>
@@ -96,17 +93,17 @@ function App() {
           <ConfigSection config={config} updateConfig={updateConfig} />
         </div>
 
-        <div className="mt-auto pt-4 border-t border-gray-800">
-          <div className="flex-col gap-2">
-            <div className="flex-row justify-between">
-              <span className="text-subtle text-xs uppercase">Projected Ferie</span>
-              <span className="font-bold text-green-500">{forecast.ferie}h <span className="text-xs text-subtle">({(forecast.ferie / 8).toFixed(1)}d)</span></span>
+        <div style={{ paddingTop: '16px', borderTop: '1px solid var(--separator-non-opaque)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span className="label">Projected Ferie</span>
+              <span className="value" style={{ color: 'var(--accent-green)' }}>{forecast.ferie}h <span style={{ opacity: 0.5 }}>({(forecast.ferie / 8).toFixed(1)}d)</span></span>
             </div>
-            <div className="flex-row justify-between">
-              <span className="text-subtle text-xs uppercase">Projected Permessi</span>
-              <span className="font-bold text-yellow-500">{forecast.permessi}h <span className="text-xs text-subtle">({(forecast.permessi / 8).toFixed(1)}d)</span></span>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span className="label">Projected Permessi</span>
+              <span className="value" style={{ color: 'var(--accent-yellow)' }}>{forecast.permessi}h <span style={{ opacity: 0.5 }}>({(forecast.permessi / 8).toFixed(1)}d)</span></span>
             </div>
-            <div className="text-xs text-center text-subtle mt-2">
+            <div style={{ fontSize: '11px', textAlign: 'center', color: 'var(--text-tertiary)', marginTop: '8px' }}>
               Balance on {format(forecastTarget, 'd MMM yyyy')}
             </div>
           </div>

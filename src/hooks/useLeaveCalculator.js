@@ -86,11 +86,11 @@ export function useLeaveCalculator() {
             let safety = 0;
             while ((isBefore(iter, end) || isSameMonth(iter, end)) && safety < 120) { // Cap at 10 years
                 // Use standard JS getFullYear
-                const fifteenth = new Date(iter.getFullYear(), iter.getMonth(), 15);
+                const accrualDate = new Date(iter.getFullYear(), iter.getMonth(), 1);
 
-                // Check if this 15th is strictly in the future relative to Today
+                // Check if this accrualDate is strictly in the future relative to Today
                 // AND within the Target range (<= TargetDate)
-                if (isAfter(fifteenth, today) && (isBefore(fifteenth, targetDate) || isSameDay(fifteenth, targetDate))) {
+                if (isAfter(accrualDate, today) && (isBefore(accrualDate, targetDate) || isSameDay(accrualDate, targetDate))) {
                     accruedFerie += Number(config.monthlyAnnualAccrual);
                     accruedPermessi += Number(config.monthlyPermessiAccrual);
                 }

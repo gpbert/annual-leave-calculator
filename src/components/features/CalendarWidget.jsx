@@ -42,14 +42,14 @@ export function CalendarWidget({ entries, selectedDates = [], onSelectDates, onA
     };
 
     return (
-        <div className="calendar-container relative">
+        <div className="calendar-container">
             <div className="calendar-header">
-                <h2 className="text-xl font-bold capitalize">
+                <h2>
                     {format(currentDate, 'MMMM yyyy')}
                 </h2>
-                <div className="flex-row gap-sm">
-                    <button onClick={prevMonth} className="icon-btn"><ChevronLeft size={20} /></button>
-                    <button onClick={nextMonth} className="icon-btn"><ChevronRight size={20} /></button>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                    <button onClick={prevMonth} className="calendar-nav-btn"><ChevronLeft size={20} /></button>
+                    <button onClick={nextMonth} className="calendar-nav-btn"><ChevronRight size={20} /></button>
                 </div>
             </div>
 
@@ -91,7 +91,13 @@ export function CalendarWidget({ entries, selectedDates = [], onSelectDates, onA
 
                             <div className="day-content">
                                 {holidayInfo && (
-                                    <span className="event-label label-holiday truncate">{holidayInfo[0]?.name}</span>
+                                    <span
+                                        className="event-label label-holiday"
+                                        title={holidayInfo[0]?.name}
+                                        style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%' }}
+                                    >
+                                        {holidayInfo[0]?.name}
+                                    </span>
                                 )}
                                 {entry && !holidayInfo && (
                                     <span className={`event-label ${entry.type === 'ferie' ? 'label-ferie' : 'label-permessi'}`}>
