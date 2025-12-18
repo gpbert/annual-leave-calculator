@@ -102,7 +102,8 @@ export function useLeaveCalculator() {
             // 2. Spending
             const futureEntries = entries.filter(e => {
                 const entryDate = parseISO(e.date);
-                return isAfter(entryDate, today) && (isBefore(entryDate, targetDate) || isSameDay(entryDate, targetDate));
+                // Include Today in spending, because "Current Balance" is usually "start of day"
+                return (isAfter(entryDate, today) || isSameDay(entryDate, today)) && (isBefore(entryDate, targetDate) || isSameDay(entryDate, targetDate));
             });
 
             const plannedFerie = futureEntries
@@ -129,12 +130,43 @@ export function useLeaveCalculator() {
         }
     };
 
+    // Bulk Operation to fix batching issues
+    const applyBulkAction = (dateStrings, action, amount = 8) => {
+        // dateStrings: string[] (ISOs)
+        // action: 'ferie' | 'permessi' | 'clear'
+        // amount: number (hours)
+
+        setEntries((prevEntries) => {
+            let newEntries = [...prevEntries];
+
+            dateStrings.forEach(dateStr => {
+                const targetDate = parseISO(dateStr);
+
+                // 1. Remove existing entry for this day
+                newEntries = newEntries.filter(e => !isSameDay(parseISO(e.date), targetDate));
+
+                // 2. Add new if not clearing
+                if (action !== 'clear') {
+                    newEntries.push({
+                        id: `${Date.now()}_${Math.random().toString(36).substr(2, 9)}_${dateStr}`, // unique ID
+                        date: dateStr,
+                        type: action,
+                        amount: Number(amount)
+                    });
+                }
+            });
+
+            return newEntries;
+        });
+    };
+
     return {
         config,
         entries,
         updateConfig,
         addEntry,
         removeEntry,
+        applyBulkAction,
         getForecast
     };
 }

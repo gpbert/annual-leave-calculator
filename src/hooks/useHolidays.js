@@ -1,12 +1,15 @@
 import Holidays from 'date-holidays';
 import { useMemo } from 'react';
 import { format } from 'date-fns';
+import { useSettings } from './useSettings';
 
 export function useHolidays(year) {
+    const { settings } = useSettings();
+
     const hd = useMemo(() => {
-        const holidays = new Holidays('IT');
+        const holidays = new Holidays(settings.country);
         return holidays;
-    }, []);
+    }, [settings.country]);
 
     const getHolidaysForYear = (y) => {
         return hd.getHolidays(y);
@@ -20,6 +23,7 @@ export function useHolidays(year) {
 
     return {
         getHolidaysForYear,
-        isHoliday
+        isHoliday,
+        country: settings.country
     };
 }
